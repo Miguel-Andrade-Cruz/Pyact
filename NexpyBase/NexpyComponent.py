@@ -9,8 +9,18 @@ class Component:
         self.closeTag = base['closeTag']
 
 
-    def inside(self, inner: str | Self) -> None:
-        self.content.append(inner)
+    def inside(self, inner: str | Self, of='') -> None:
+        if of != '':
+            for item in self.content:
+                if type(item) == str:
+                    continue
+                elif of in item.openTag:
+                    item.inside(inner=inner)
+                    return
+                elif of not in item.openTag:
+                    item.inside(inner=inner, of=of)
+        else:
+            self.content.append(inner)
 
 
     def mount(self) -> str:

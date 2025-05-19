@@ -8,7 +8,14 @@ class NexpyNode():
         self.composite = Component(base)
 
     
-    def inside(self, inner: str | Self) -> Self:
+    def inside(self, inner: str | Self, of='') -> Self:
+        
+        if of != '':
+            if isinstance(inner, NexpyNode):
+                self.composite.inside(of=of, inner=inner.composite)
+            elif type(inner) == str:
+                self.composite.inside(of=of, inner=inner)
+        
         if isinstance(inner, NexpyNode):
             self.composite.inside(inner.composite)
         

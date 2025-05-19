@@ -3,32 +3,25 @@ from NexpyBase.NexpyNode import NexpyNode
 
 class HtmlBasics(NexpyNode):
 
-	def blank(self) -> NexpyNode:
-
-		blankElement = NexpyNode()
-		return blankElement
-
 
 	def html5template(self, doctype: str, lang: str = 'en') -> NexpyNode:
     
-		html5templateElement = self.blank(
+		html5templateElement = NexpyNode(
 		).inside(
-			f"<! DOCTYPE {doctype}>"
+			inner=f"<! DOCTYPE {doctype}>"
 		).inside(
-			self.html(lang=lang
-			)
-			.inside(
-				self.head(
+			inner=self.html(lang=lang
+			).inside(
+				inner=self.head(
 				).inside(
-					self.meta(charset='UTF-8')
+					inner=self.meta(charset='UTF-8')
 				).inside(
-					self.meta(name='viewport', content='width=device-width, initial-scale=1.0')
+					inner=self.meta(name='viewport', content_flag='width=device-width, initial-scale=1.0')
 				)
 			).inside(
-				self.body()
+				inner=self.body()
 			)
 		)
-
 
 		return html5templateElement
 
