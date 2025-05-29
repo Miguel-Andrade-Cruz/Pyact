@@ -4,60 +4,10 @@ from NexpyBase.NexpyNode import NexpyNode
 class HtmlBasics(NexpyNode):
 
 
-	def html5template(self, doctype: str, lang: str = 'en') -> NexpyNode:
+	def html5template(self, title: str = 'en', lang: str = 'Document') -> NexpyNode:
     
-		html5templateElement = NexpyNode(
-		).inside(
-			inner=f"<! DOCTYPE {doctype}>"
-		).inside(
-			inner=self.html(lang=lang
-			).inside(
-				inner=self.head(
-				).inside(
-					inner=self.meta(charset='UTF-8')
-				).inside(
-					inner=self.meta(name='viewport', content_flag='width=device-width, initial-scale=1.0')
-				)
-			).inside(
-				inner=self.body()
-			)
-		)
-
+		html5templateElement = NexpyNode().indexTemplate(lang=lang, title=title)
 		return html5templateElement
-
-
-	def html(self, lang: str='en', content='') -> NexpyNode:
-
-		htmlElement = NexpyNode({
-			'openTag': f"<html lang=\"{lang}\">{NEW_LINE}",
-			'content': [content],
-			'closeTag': f"</html>{NEW_LINE}"
-		})
-
-		return htmlElement
-
-
-	def head(self, content='') -> NexpyNode:
-		
-		headElement = NexpyNode({
-			'openTag': f"<head>{NEW_LINE}",
-			'content': [content],
-			'closeTag': f"</head>{NEW_LINE}"
-		})
-
-		return headElement
-
-
-
-	def body(self, className: str = '',id: str='', content='') -> NexpyNode:
-		
-		bodyElement = NexpyNode({
-			'openTag': f"<body class=\"{className}\" id=\"{id}\">{NEW_LINE}",
-			'content': [content],
-			'closeTag': f"</body>{NEW_LINE}"
-		})
-
-		return bodyElement
 
 
 	def p(self, className: str = '',id: str = '', content='') -> NexpyNode:
@@ -69,6 +19,7 @@ class HtmlBasics(NexpyNode):
 		})
 
 		return pElement
+
 
 	def meta(self, name: str = '', content_flag: str='', content: str='', charset: str = '') -> NexpyNode:
 
