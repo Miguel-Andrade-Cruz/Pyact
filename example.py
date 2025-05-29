@@ -7,15 +7,15 @@ def loginForm():
 	form = Inputs().form(
         action='/login', method='post'
     ).inside(
-        inner=Inputs().input(
+        Inputs().input(
             type='text', placeholder='Digite seu email'
 		)
 	).inside(
-        inner=Inputs().input(
+        Inputs().input(
 			type='password', placeholder='Digite sua senha'
         )
 	).inside(
-        inner=Inputs().button(
+        Inputs().button(
             type='submit', content='Entrar'
 		)
 	)
@@ -28,7 +28,7 @@ def containerForm():
 	container = Semantics().div(
 		className='container'
 	).inside(
-		inner=loginForm()
+		loginForm()
 	)
 
 	return container
@@ -36,10 +36,9 @@ def containerForm():
 
 def app():
 	html = HtmlBasics().html5template(
-		doctype='html', lang='pt-br'
+		title='Login', lang='pt-br'
 	).inside(
-		of='body',
-		inner=containerForm()
+		containerForm()
 	)
 
 	return html.mount()
