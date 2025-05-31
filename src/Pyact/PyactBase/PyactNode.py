@@ -1,7 +1,7 @@
 from typing import Self
-from NexpyBase.NexpyComponent import Component
+from .PyactComponent import Component
 
-class NexpyNode():
+class PyactNode():
     
     
     def __init__(self, base: dict = {'openTag': '', 'content': [], 'closeTag': ''}) -> None:
@@ -16,7 +16,7 @@ class NexpyNode():
     
     def inside(self, inner: str | Self) -> Self:
         
-        if isinstance(inner, NexpyNode):
+        if isinstance(inner, PyactNode):
             self.composite.inside(inner.composite)
         
         elif type(inner) == str:
