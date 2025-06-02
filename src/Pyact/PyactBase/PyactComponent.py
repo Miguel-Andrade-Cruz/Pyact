@@ -1,7 +1,7 @@
 from typing import Self
+from ..utils.Consts import NEW_LINE, TAB_LINE
 
 class Component:
-
 
     def __init__(self, base: dict) -> None:
         self.openTag = base['openTag']
@@ -9,20 +9,16 @@ class Component:
         self.closeTag = base['closeTag']
 
     def indexTemplate(lang: str, title: str) -> Self:
-        template_open = f"""
-<!DOCTYPE html>
+        template_open = f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{title}</title>
 </head>
-<body>
-"""
-        template_close = """
-</body>
-</html>
-"""
+<body>"""
+        template_close = """</body>
+</html>"""
 
         main_component = Component({'openTag': template_open, 'content': [], 'closeTag': template_close})
         return main_component
@@ -32,15 +28,15 @@ class Component:
             self.content.append(inner)
 
 
-    def mount(self) -> str:
-        html = self.openTag
+    def mount(self, tab_count:int = 0) -> str:        
+        html = TAB_LINE*tab_count + self.openTag + NEW_LINE
 
         for item in self.content:
             if isinstance(item, Component):
-                html += item.mount()
+                html  += item.mount(tab_count + 1) + NEW_LINE
             elif type(item) == str:
-                html += item
+                html += TAB_LINE*tab_count + item + NEW_LINE
 
-        html += self.closeTag
+        html += TAB_LINE*tab_count + self.closeTag + NEW_LINE
 
         return html

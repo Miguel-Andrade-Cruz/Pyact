@@ -1,4 +1,5 @@
 .env
 .venv
-pyproject.toml
 dist
+pyproject.toml
+example.py

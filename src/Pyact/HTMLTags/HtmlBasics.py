@@ -1,23 +1,16 @@
-from ..utils.Consts import NEW_LINE
 from ..PyactBase.PyactNode import PyactNode
 
 
+html5template = PyactNode.indexTemplate
 
-class HtmlBasics(PyactNode):
+h1 = PyactNode.nodeTagBase('h1')
+h2 = PyactNode.nodeTagBase('h2')
+h3 = PyactNode.nodeTagBase('h3')
+h4 = PyactNode.nodeTagBase('h4')
+h5 = PyactNode.nodeTagBase('h5')
+h6 = PyactNode.nodeTagBase('h6')
 
+p = PyactNode.nodeTagBase('p')
 
-	def html5template(self, title: str = 'en', lang: str = 'Document') -> PyactNode:
-    
-		html5templateElement =PyactNode().indexTemplate(lang=lang, title=title)
-		return html5templateElement
+img = PyactNode.nodeTagBase('img', singleTag=True)
 
-
-	def p(self, className: str = '',id: str = '', content='') -> PyactNode:
-		
-		pElement =PyactNode({
-			'openTag': f"<p class=\"{className}\" id=\"{id}\">{NEW_LINE}",
-			'content': [content],
-			'closeTag': f"</p>{NEW_LINE}"
-		})
-
-		return pElement
