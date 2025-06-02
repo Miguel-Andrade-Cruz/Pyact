@@ -7,45 +7,44 @@ components to make it modular and more fluid to use, just like react does.
 # How to use it?
 After importing the libraries, you just need to instatiate an object and use the `inside` method to insert another elements, just like below:
 ```
-from Pyact.Inputs import Inputs
-from Pyact.HtmlBasics import HtmlBasics
-from Pyact.Semantics import Semantics
+import Pyact.Inputs as ipt
+from Pyact.HtmlBasics import hlb
+from Pyact.Semantics import smt
 
-def button(content=''):
-    button = Inputs()
+def Button(content=''):
+    button = ipt.input(type=button)
 
     button.inside(
-        HtmlBasics().p(content=content)
+        hlb.p(content=content)
     )
 
     return button
 def loginPage():
-    div = Semantics.div(
-
+    div = div(
     ).inside(
-        HtmlBaiscs().p(content='Enter your email')
+        hlb.p(content='Enter your email')
         
     ).inside(
-        Inputs().input()
+        ipt.input(type=text)
         
     ).inside(
-        HtmlBaiscs().p(content='Enter your password')
+        hlb.p(content='Enter your password')
 
     ).inside(
-        Inputs().input()
+        ipt.input()
 
     ).inside(
-        button('Login')
+        Button('Login')
     
     ).inside(
-        button('Forgot password?')
+        Button('Forgot password?')
     )
 
     return loginPage
 
 
 def app():
-    app = HtmlBasics().html5template(
+    app = hlb.html5template(
 
     ).inside(
         loginPage
