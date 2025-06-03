@@ -1,2 +1,2 @@
 NEW_LINE = '\n'
-TAB_LINE = '\t'
+TAB_LINE = '    ' # Four spaces

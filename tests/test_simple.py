@@ -12,9 +12,9 @@ class TestSimple(unittest.TestCase):
             Inputs().button().inside(
                 HtmlBasics().p(content='Click me')
             )
-        ).mount()
+        )()
         self.assertTrue(app, """<div>
-<button>Click me</button>
+        <button>Click me</button>
 </div>
 """
         )
@@ -24,17 +24,17 @@ class TestSimple(unittest.TestCase):
 
         app.inside(
             Inputs().button(content='Click me')
-        ).mount()
+        )()
 
         self.assertTrue(app, """<!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<       head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
 </head>
 <body>
-<button>Click me</button>
+        <button>Click me</button>
 </body>
 </html>
 """

@@ -50,7 +50,7 @@ def app():
         loginPage
     )
 
-    return app.mount()
+    return app()
 ```
 
 As you can see from above, Pyact allows you to create separate modules and attach them easely by just returning

@@ -10,6 +10,10 @@ class PyactNode():
         self.composite = Component(base)
         return
     
+    def __call__(self) -> str:
+        return self.mount()
+
+
     def nodeTagBase(tag:str, singleTag:bool = False) -> Callable:
         
         def nodeSingleTag(**flags) -> PyactNode:
