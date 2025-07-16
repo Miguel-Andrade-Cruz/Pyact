@@ -1,5 +1,5 @@
-from ..PyactBase.PyactNode import PyactNode
+from ..PyactBase.PyactFactory import node_tag_base
 
-form = PyactNode.nodeTagBase('form')
-input = PyactNode.nodeTagBase('input')
-button = PyactNode.nodeTagBase('button')
+form = node_tag_base('form')
+input = node_tag_base('input', singleTag=True)
+button = node_tag_base('button')

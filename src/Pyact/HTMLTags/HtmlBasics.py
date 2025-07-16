@@ -1,16 +1,14 @@
-from ..PyactBase.PyactNode import PyactNode
+from ..PyactBase.PyactFactory import node_tag_base, index_template_factory
 
+html5template = index_template_factory()
 
-html5template = PyactNode.indexTemplate
+h1 = node_tag_base("h1")
+h2 = node_tag_base("h2")
+h3 = node_tag_base("h3")
+h4 = node_tag_base("h4")
+h5 = node_tag_base("h5")
+h6 = node_tag_base("h6")
 
-h1 = PyactNode.nodeTagBase('h1')
-h2 = PyactNode.nodeTagBase('h2')
-h3 = PyactNode.nodeTagBase('h3')
-h4 = PyactNode.nodeTagBase('h4')
-h5 = PyactNode.nodeTagBase('h5')
-h6 = PyactNode.nodeTagBase('h6')
+p = node_tag_base("p")
 
-p = PyactNode.nodeTagBase('p')
-
-img = PyactNode.nodeTagBase('img', singleTag=True)
-
+img = node_tag_base("img", singleTag=True)

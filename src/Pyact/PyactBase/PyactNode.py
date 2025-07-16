@@ -1,70 +1,41 @@
-from collections.abc import Callable
-from typing import Self
-from .PyactComponent import Component
-from ..utils.Consts import TAB_LINE
+from ..utils.Consts import TAB_LINE, NEW_LINE
 
 
 class PyactNode():
-    def __init__(self, base: dict = {'openTag': '', 'content': [], 'closeTag': ''}) -> None:
+    def __init__(self, open_tag, close_tag = '', inside = [''], single_tag:bool = False) -> None:
         
-        self.composite = Component(base)
+        self.open_tag = open_tag
+        self.inside = inside
+        self.close_tag = close_tag
+        self.single_tag = single_tag
+
         return
-    
+
+
+
     def __call__(self) -> str:
         return self.mount()
 
 
-    def nodeTagBase(tag:str, singleTag:bool = False) -> Callable:
+
+    def mount(self, tab_count:int = 0) -> str:        
+
+        html = TAB_LINE*tab_count + self.open_tag + NEW_LINE
         
-        def nodeSingleTag(**flags) -> PyactNode:
-            node = PyactNode({
-                'openTag': f"<{tag}{PyactNode.concatFlags(flags=flags)}>",
-                'content': [],
-                'closeTag': ''
-            })
-            return node
+        if self.single_tag:
+            return html
+
+
+        for item in self.inside:
+            
+            if isinstance(item, PyactNode):
+                html += item.mount(tab_count + 1)
+                
+ 
+            elif type(item) is str:
+                html += TAB_LINE*(tab_count+1) + item + NEW_LINE
         
-        def nodeTag(content:str = '', **flags) -> PyactNode:
-            node = PyactNode({
-                'openTag': f"<{tag}{PyactNode.concatFlags(flags=flags)}>",
-                'content': [f'{TAB_LINE}{content}'],
-                'closeTag': f"</{tag}>"
-            })
-            return node
+        html += TAB_LINE*tab_count + self.close_tag + NEW_LINE
+
+        return html
         
-        if singleTag:
-            return nodeSingleTag
-        else:
-            return nodeTag
-
-
-    def concatFlags(flags:dict) -> str:
-        string_flags:str = ""
-        for key, value in flags.items():
-            if key == 'className':
-                string_flags += f" class={value}"
-            string_flags += f" {key}={value}"
-
-        return string_flags
-
-
-    def indexTemplate(lang: str, title: str) -> Self:
-        
-        index_html = PyactNode()
-        index_html.composite = Component.indexTemplate(lang=lang, title=title)
-        return index_html
-
-    
-    def inside(self, inner: str | Self) -> Self:
-        
-        if isinstance(inner, PyactNode):
-            self.composite.inside(inner.composite)
-        
-        elif type(inner) == str:
-            self.composite.inside(inner)
-        
-        return self
-
-
-    def mount(self) -> str:
-        return self.composite.mount()
